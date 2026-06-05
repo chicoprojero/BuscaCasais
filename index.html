@@ -181,14 +181,14 @@ main{padding:10px 16px 44px}
 </head>
 <body>
 <header>
-<h2 class="titulo">Presença de Casais 2026 - Ver.0.2 <span class="credito">by Francisco Moreira • @chicoprojeto_</span></h2>
+<h2 class="titulo">Presença de Casais 2026 - Ver.0.3 <span class="credito">by Francisco Moreira • @chicoprojeto_</span></h2>
 
   <div class="status">
     <div id="conexao" class="off">🔴 Conectando...</div>
     <div id="atualizacao">Última atualização: --:--:--</div>
   </div>
 
-  <input id="busca" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Buscar casal, grupo ou casal branco...">
+  <input id="busca" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Buscar casal ou grupoo...">
 
   <div class="resumo">
     <div class="box">
@@ -367,8 +367,7 @@ function renderizar(){
     tituloLista.textContent = "Resultado da busca";
     lista = dados.filter(x =>
       normalizar(x.casal).includes(termo) ||
-      normalizar(x.grupo).includes(termo) ||
-      normalizar(x.branco).includes(termo)
+      normalizar(x.grupo).includes(termo)
     );
   }else if(modo === "presentes"){
     tituloLista.textContent = "Casais presentes";
