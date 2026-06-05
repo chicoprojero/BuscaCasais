@@ -181,7 +181,7 @@ main{padding:10px 16px 44px}
 </head>
 <body>
 <header>
-<h2 class="titulo">Presença de Casais 2026 - Ver.0.3 <span class="credito">by Francisco Moreira • @chicoprojeto_</span></h2>
+<h2 class="titulo">Presença de Casais 2026 - Ver.0.4 <span class="credito">by Francisco Moreira • @chicoprojeto_</span></h2>
 
   <div class="status">
     <div id="conexao" class="off">🔴 Conectando...</div>
@@ -363,13 +363,26 @@ function renderizar(){
   const termo = normalizar(busca.value.trim());
   let lista;
 
-  if(termo.length > 0){
-    tituloLista.textContent = "Resultado da busca";
-    lista = dados.filter(x =>
-      normalizar(x.casal).includes(termo) ||
-      normalizar(x.grupo).includes(termo)
+if(termo.length > 0){
+  tituloLista.textContent = "Resultado da busca";
+
+  lista = dados.filter(x => {
+
+    const palavras = normalizar(x.casal)
+      .replace(/\(.*?\)/g, "") // remove apelidos entre parenteses
+      .split(/\s+/);
+
+    const encontrouNome = palavras.some(p =>
+      p.startsWith(termo)
     );
-  }else if(modo === "presentes"){
+
+    const encontrouGrupo =
+      normalizar(x.grupo).startsWith(termo);
+
+    return encontrouNome || encontrouGrupo;
+  });
+
+}else if(modo === "presentes"){
     tituloLista.textContent = "Casais presentes";
     lista = ordenarPorNome(listaPresentes());
   }else{
