@@ -181,14 +181,14 @@ main{padding:10px 16px 44px}
 </head>
 <body>
 <header>
-<h2 class="titulo">Presença de Casais 2026 - Ver.0.4 <span class="credito">by Francisco Moreira • @chicoprojeto_</span></h2>
+<h2 class="titulo">Presença de Casais 2026 - Ver.0.5 <span class="credito">by Francisco Moreira • @chicoprojeto_</span></h2>
 
   <div class="status">
     <div id="conexao" class="off">🔴 Conectando...</div>
     <div id="atualizacao">Última atualização: --:--:--</div>
   </div>
 
-  <input id="busca" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Buscar casal ou grupoo...">
+  <input id="busca" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Buscar casal ou grupo...">
 
   <div class="resumo">
     <div class="box">
@@ -238,54 +238,54 @@ const db = getDatabase(app);
 const presencaRef = ref(db, "presenca");
 
 const dados = [
-{n:1,casal:"AURÉLIO E NATÁLIA",grupo:"VERDE",branco:"Rapha e Kelly"},
-{n:2,casal:"EDGAR E ÉRIKA",grupo:"VERDE",branco:"PV e Duda / Éder e Pri"},
-{n:3,casal:"GEOMAR JUNIO E REBECCA",grupo:"VERDE",branco:"Geomar e Eliane"},
-{n:4,casal:"NEUBER E KARINA",grupo:"VERDE",branco:"PV e Duda / Paulo e Bel"},
-{n:5,casal:"RAFA (Rafael) E JANA (Janaina)",grupo:"VERDE",branco:"PV e Duda / Gui e Babi"},
-{n:6,casal:"THALECO (Thalis) E ALINE",grupo:"VERDE",branco:"PV e Duda"},
-{n:7,casal:"DERIK E MILLENA",grupo:"ROSA",branco:"Alan e Ester"},
-{n:8,casal:"ESDRAS E VIVI (Viviane)",grupo:"ROSA",branco:"Judson e Lena"},
-{n:9,casal:"JÔ (Josley) E JU (Juliana)",grupo:"ROSA",branco:"Alberto e Carol"},
-{n:10,casal:"MATHEUS PAULO E NATHALIA",grupo:"ROSA",branco:"Gustavo e Bia"},
-{n:11,casal:"RENATO E EVELLYN",grupo:"ROSA",branco:"Renato e Romilda"},
-{n:12,casal:"VICTOR E KEMILLY",grupo:"ROSA",branco:"Lucas e Paloma"},
-{n:13,casal:"ITALO E RAFA (Rafaela)",grupo:"AZUL",branco:"Arthur e Liria"},
-{n:14,casal:"LÉO (Leonardo) E LUANA",grupo:"AZUL",branco:"Wilson e Fernanda"},
-{n:15,casal:"RICHARDSON E VIVI (Virginia)",grupo:"AZUL",branco:"Athos e Camila"},
-{n:16,casal:"ROGERIO E ROSANGELA",grupo:"AZUL",branco:"Vinicius e Jana"},
-{n:17,casal:"SIMÕES (Lucas) E SABRINA",grupo:"AZUL",branco:"Kleber e Geci"},
-{n:18,casal:"WILLIAM E ANA LUIZA",grupo:"AZUL",branco:"Jonathan e Iandra"},
-{n:19,casal:"ALEXANDRE E MARA (Maria Lúcia)",grupo:"MARROM",branco:"Amós e Marly"},
-{n:20,casal:"GUTO (Rogério) E DEBORA",grupo:"MARROM",branco:"Beto e Samanta"},
-{n:21,casal:"ITALO E DAIANE",grupo:"MARROM",branco:"Patrick e Katherine"},
-{n:22,casal:"JIZREEL E INGRID",grupo:"MARROM",branco:"Tiel e Brenda"},
-{n:23,casal:"JONATAS E LUANA",grupo:"MARROM",branco:"Pr Gilbert"},
-{n:24,casal:"NILSON E TALITHA",grupo:"MARROM",branco:"Rafa e Amanda"},
-{n:25,casal:"AKNO E GLAYCE",grupo:"LILAS",branco:"Isaac e Nathalia"},
-{n:26,casal:"DANILO E PRISCILA",grupo:"LILAS",branco:"Ramon e Carol"},
-{n:27,casal:"GUSTAVO E SUZANE",grupo:"LILAS",branco:"Mauricio e Hosana"},
-{n:28,casal:"KLEBER E RAFAELLE",grupo:"LILAS",branco:"Rafa e Amanda"},
-{n:29,casal:"LUCAS E JOSI (Josianne)",grupo:"LILAS",branco:"Patrik e Katherine"},
-{n:30,casal:"SÉRGIO E NÚBIA (Adenubia)",grupo:"LILAS",branco:"Paulo Jr e Verônica"},
-{n:31,casal:"DIOGO E DEBORAH",grupo:"VERMELHO",branco:"Rafa e Amanda"},
-{n:32,casal:"ELIOENAI E LARISSA",grupo:"VERMELHO",branco:"Douglas e Cristiane"},
-{n:33,casal:"FELIPE E ESTER",grupo:"VERMELHO",branco:"Gustavo e Bia"},
-{n:34,casal:"JOÃO E RAFA (Rafaela)",grupo:"VERMELHO",branco:"Welder e Polly"},
-{n:35,casal:"JOÃO E THAÍS",grupo:"VERMELHO",branco:"Gui e Babi"},
-{n:36,casal:"WELLINGTON E THATIANA",grupo:"VERMELHO",branco:"André e Luiza / Adair e Laís"},
-{n:37,casal:"ALEX E JU (Jucimara)",grupo:"AMARELO",branco:"Rapha e Kelly"},
-{n:38,casal:"PAULO (Cleber Paulo) E ANNE",grupo:"AMARELO",branco:"Ramon e Pâmela"},
-{n:39,casal:"PEDRO E MARINA",grupo:"AMARELO",branco:"Paulo Jr e Verônica"},
-{n:40,casal:"RICARDO E CAMILA",grupo:"AMARELO",branco:"Paulinho e Débora"},
-{n:41,casal:"RONY E KARINA",grupo:"AMARELO",branco:"Clebinho e Sasa"},
-{n:42,casal:"TARCISIO E ROBERTA",grupo:"AMARELO",branco:"Gilson e Márcia"},
-{n:43,casal:"CLAYTON E CHENIA",grupo:"LARANJA",branco:"Léo e Claudia"},
-{n:44,casal:"MILTON E JOANA",grupo:"LARANJA",branco:"Leonardo e Andressa"},
-{n:45,casal:"PAULINHO (Paulo) E SILVANA",grupo:"LARANJA",branco:"Wilson e Fernanda"},
-{n:46,casal:"PAULO E SIMONE",grupo:"LARANJA",branco:"Othiliel e Ariadne"},
-{n:47,casal:"ROSEMBERG E JANAINA",grupo:"LARANJA",branco:"Judson e Lena"},
-{n:48,casal:"WILSON E MARTA",grupo:"LARANJA",branco:"João e Cirlei"}
+{n:1,casal:"AURÉLIO E NATÁLIA",grupo:"VERDE"},
+{n:2,casal:"EDGAR E ÉRIKA",grupo:"VERDE"},
+{n:3,casal:"GEOMAR JUNIO E REBECCA",grupo:"VERDE"},
+{n:4,casal:"NEUBER E KARINA",grupo:"VERDE"},
+{n:5,casal:"RAFA (Rafael) E JANA (Janaina)",grupo:"VERDE"},
+{n:6,casal:"THALECO (Thalis) E ALINE",grupo:"VERDE"},
+{n:7,casal:"DERIK E MILLENA",grupo:"ROSA"},
+{n:8,casal:"ESDRAS E VIVI (Viviane)",grupo:"ROSA"},
+{n:9,casal:"JÔ (Josley) E JU (Juliana)",grupo:"ROSA"},
+{n:10,casal:"MATHEUS PAULO E NATHALIA",grupo:"ROSA"},
+{n:11,casal:"RENATO E EVELLYN",grupo:"ROSA"},
+{n:12,casal:"VICTOR E KEMILLY",grupo:"ROSA"},
+{n:13,casal:"ITALO E RAFA (Rafaela)",grupo:"AZUL"},
+{n:14,casal:"LÉO (Leonardo) E LUANA",grupo:"AZUL"},
+{n:15,casal:"RICHARDSON E VIVI (Virginia)",grupo:"AZUL"},
+{n:16,casal:"ROGERIO E ROSANGELA",grupo:"AZUL"},
+{n:17,casal:"SIMÕES (Lucas) E SABRINA",grupo:"AZUL"},
+{n:18,casal:"WILLIAM E ANA LUIZA",grupo:"AZUL"},
+{n:19,casal:"ALEXANDRE E MARA (Maria Lúcia)",grupo:"MARROM"},
+{n:20,casal:"GUTO (Rogério) E DEBORA",grupo:"MARROM"},
+{n:21,casal:"ITALO E DAIANE",grupo:"MARROM"},
+{n:22,casal:"JIZREEL E INGRID",grupo:"MARROM"},
+{n:23,casal:"JONATAS E LUANA",grupo:"MARROM"},
+{n:24,casal:"NILSON E TALITHA",grupo:"MARROM"},
+{n:25,casal:"AKNO E GLAYCE",grupo:"LILAS"},
+{n:26,casal:"DANILO E PRISCILA",grupo:"LILAS"},
+{n:27,casal:"GUSTAVO E SUZANE",grupo:"LILAS"},
+{n:28,casal:"KLEBER E RAFAELLE",grupo:"LILAS"},
+{n:29,casal:"LUCAS E JOSI (Josianne)",grupo:"LILAS"},
+{n:30,casal:"SÉRGIO E NÚBIA (Adenubia)",grupo:"LILAS"},
+{n:31,casal:"DIOGO E DEBORAH",grupo:"VERMELHO"},
+{n:32,casal:"ELIOENAI E LARISSA",grupo:"VERMELHO"},
+{n:33,casal:"FELIPE E ESTER",grupo:"VERMELHO"},
+{n:34,casal:"JOÃO E RAFA (Rafaela)",grupo:"VERMELHO"},
+{n:35,casal:"JOÃO E THAÍS",grupo:"VERMELHO"},
+{n:36,casal:"WELLINGTON E THATIANA",grupo:"VERMELHO"},
+{n:37,casal:"ALEX E JU (Jucimara)",grupo:"AMARELO"},
+{n:38,casal:"PAULO (Cleber Paulo) E ANNE",grupo:"AMARELO"},
+{n:39,casal:"PEDRO E MARINA",grupo:"AMARELO"},
+{n:40,casal:"RICARDO E CAMILA",grupo:"AMARELO"},
+{n:41,casal:"RONY E KARINA",grupo:"AMARELO"},
+{n:42,casal:"TARCISIO E ROBERTA",grupo:"AMARELO"},
+{n:43,casal:"CLAYTON E CHENIA",grupo:"LARANJA"},
+{n:44,casal:"MILTON E JOANA",grupo:"LARANJA"},
+{n:45,casal:"PAULINHO (Paulo) E SILVANA",grupo:"LARANJA"},
+{n:46,casal:"PAULO E SIMONE",grupo:"LARANJA"},
+{n:47,casal:"ROSEMBERG E JANAINA",grupo:"LARANJA"},
+{n:48,casal:"WILSON E MARTA",grupo:"LARANJA"}
 ];
 
 let presenca = {};
@@ -405,7 +405,7 @@ if(termo.length > 0){
       <div class="info">
         <div class="casal">${x.n}. ${x.casal}</div>
         <div class="grupo">Grupo ${x.grupo}</div>
-        <div class="branco">Casal branco: ${x.branco || "-"}</div>
+        
       </div>
     </div>`;
   }).join("");
