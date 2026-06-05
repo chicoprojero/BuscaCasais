@@ -85,7 +85,12 @@ input[type="search"]{
   background:#111827;
   color:#fff;
 }
-main{padding:10px 16px 90px}
+.aba.copiar{
+  background:#dcfce7;
+  color:#166534;
+  border-color:#bbf7d0;
+}
+main{padding:10px 16px 44px}
 .titulo-secao{
   font-size:18px;
   font-weight:800;
@@ -121,50 +126,54 @@ main{padding:10px 16px 90px}
   text-align:center;
   margin-top:24px;
 }
-.barra-final{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  padding:10px 16px;
-  box-shadow:0 -1px 8px rgba(0,0,0,.16);
-  display:flex;
-  gap:8px;
-}
-button{
-  flex:1;
-  border:0;
-  border-radius:10px;
-  padding:12px;
-  font-size:15px;
-  font-weight:700;
-}
-.btn-faltantes{background:#e0f2fe;color:#075985}
-.btn-copiar{background:#dcfce7;color:#166534}
 .aviso{
   font-size:13px;
   color:#555;
   margin-top:8px;
 }
-  .footer{
-  position:fixed;
-  bottom:68px;
-  left:0;
-  right:0;
+.titulo{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:0 0 10px 0;
+  font-size:21px;
+}
+
+.credito{
+  font-size:11px;
+  font-weight:400;
+  color:#9ca3af;
+}
+.footer{
   text-align:center;
   font-size:12px;
   color:#6b7280;
-  background:#f3f4f6;
-  padding:6px 0;
-  z-index:15;
+  padding:10px 8px 18px;
 }
-  
+.footer a{
+  color:#6b7280;
+  text-decoration:none;
+}
+.footer a:hover{
+  text-decoration:underline;
+}
+
+
+
+
+@media (max-width:520px){
+  .abas{flex-direction:column}
+  .status{flex-direction:column}
+}
 </style>
 </head>
 <body>
 <header>
-  <h2>Presença de Casais 2026</h2>
+<h2 class="titulo">
+  Presença de Casais 2026
+  <span class="credito">by Francisco Moreira • @chicoprojeto_</span>
+</h2>
 
   <div class="status">
     <div id="conexao" class="off">🔴 Conectando...</div>
@@ -191,6 +200,7 @@ button{
   <div class="abas">
     <button id="btnFaltantes" class="aba ativa" onclick="mudarModo('faltantes')">Faltantes</button>
     <button id="btnPresentes" class="aba" onclick="mudarModo('presentes')">Presentes</button>
+    <button class="aba copiar" onclick="copiarFaltantes()">Copiar faltantes</button>
   </div>
 
   <div class="aviso">Para corrigir, entre em Presentes e desmarque individualmente.</div>
@@ -202,21 +212,10 @@ button{
 </main>
 
 <div class="footer">
-  by Francisco Moreira • @chicoprojeto_
+  by Francisco Moreira •
+  <a href="https://instagram.com/chicoprojeto_" target="_blank" rel="noopener noreferrer">@chicoprojeto_</a>
 </div>
-  
-<div class="barra-final">
-  <button class="btn-faltantes" onclick="mostrarSomenteFaltantes()">Ver faltantes</button>
-  <button class="btn-copiar" onclick="copiarFaltantes()">Copiar faltantes</button>
-</div>
-  
-<div class="footer">
-  Desenvolvido por Francisco Moreira •
-  <a href="https://instagram.com/chicoprojeto_" target="_blank">
-    @chicoprojeto_
-  </a>
-</div>
-  
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getDatabase, ref, set, remove, onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
@@ -397,10 +396,6 @@ function renderizar(){
   }).join("");
 }
 
-function mostrarSomenteFaltantes(){
-  mudarModo("faltantes");
-}
-
 async function copiarFaltantes(){
   const faltantes = ordenarPorNome(listaFaltantes());
   let texto = `Faltam ${faltantes.length} casal(is):\n\n`;
@@ -432,7 +427,6 @@ busca.addEventListener("keyup", renderizar);
 busca.addEventListener("search", renderizar);
 
 window.setPresencaGlobal = setPresenca;
-window.mostrarSomenteFaltantes = mostrarSomenteFaltantes;
 window.copiarFaltantes = copiarFaltantes;
 window.mudarModo = mudarModo;
 
