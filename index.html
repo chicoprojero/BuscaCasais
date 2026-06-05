@@ -147,6 +147,24 @@ button{
   color:#555;
   margin-top:8px;
 }
+  
+.footer{
+  text-align:center;
+  font-size:12px;
+  color:#9ca3af;
+  margin:15px 0 80px 0;
+}
+
+.footer a{
+  color:#6b7280;
+  text-decoration:none;
+}
+
+.footer a:hover{
+  text-decoration:underline;
+}
+
+  
 </style>
 </head>
 <body>
@@ -188,11 +206,25 @@ button{
   <div id="resultados"></div>
 </main>
 
+<div class="footer">
+  Desenvolvido por Francisco Moreira •
+  <a href="https://instagram.com/chicoprojeto_" target="_blank">
+    @chicoprojeto_
+  </a>
+</div>
+  
 <div class="barra-final">
   <button class="btn-faltantes" onclick="mostrarSomenteFaltantes()">Ver faltantes</button>
   <button class="btn-copiar" onclick="copiarFaltantes()">Copiar faltantes</button>
 </div>
-
+  
+<div class="footer">
+  Desenvolvido por Francisco Moreira •
+  <a href="https://instagram.com/chicoprojeto_" target="_blank">
+    @chicoprojeto_
+  </a>
+</div>
+  
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getDatabase, ref, set, remove, onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
