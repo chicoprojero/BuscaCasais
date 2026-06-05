@@ -134,6 +134,20 @@ main{padding:10px 16px 44px}
   color:#555;
   margin-top:8px;
 }
+.titulo{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:0 0 10px 0;
+  font-size:21px;
+}
+
+.credito{
+  font-size:9px;
+  font-weight:400;
+  color:#9ca3af;
+}
 .footer{
   text-align:center;
   font-size:12px;
@@ -147,15 +161,27 @@ main{padding:10px 16px 44px}
 .footer a:hover{
   text-decoration:underline;
 }
+
+
+
+
+
 @media (max-width:520px){
-  .abas{flex-direction:column}
-  .status{flex-direction:column}
+  .status{
+    flex-direction:column;
+  }
+
+  .aba{
+    font-size:13px;
+    padding:10px 6px;
+  }
 }
+  
 </style>
 </head>
 <body>
 <header>
-  <h2>Presença de Casais 2026-v0.1</h2>
+<h2 class="titulo">Presença de Casais 2026 - Ver.0.2 <span class="credito">by Francisco Moreira • @chicoprojeto_</span></h2>
 
   <div class="status">
     <div id="conexao" class="off">🔴 Conectando...</div>
@@ -182,7 +208,7 @@ main{padding:10px 16px 44px}
   <div class="abas">
     <button id="btnFaltantes" class="aba ativa" onclick="mudarModo('faltantes')">Faltantes</button>
     <button id="btnPresentes" class="aba" onclick="mudarModo('presentes')">Presentes</button>
-    <button class="aba copiar" onclick="copiarFaltantes()">Copiar faltantes</button>
+    <button class="aba copiar" onclick="copiarFaltantes()"> 📋 Faltantes</button>
   </div>
 
   <div class="aviso">Para corrigir, entre em Presentes e desmarque individualmente.</div>
@@ -192,11 +218,6 @@ main{padding:10px 16px 44px}
   <div id="tituloLista" class="titulo-secao">Casais que ainda faltam</div>
   <div id="resultados"></div>
 </main>
-
-<div class="footer">
-  by Francisco Moreira •
-  <a href="https://instagram.com/chicoprojeto_" target="_blank" rel="noopener noreferrer">@chicoprojeto_</a>
-</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
