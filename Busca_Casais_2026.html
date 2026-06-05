@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Busca de Casais 2026</title>
+<style>
+body{font-family:Arial,sans-serif;margin:20px;background:#f5f5f5}
+input{width:100%;padding:12px;font-size:18px}
+.card{background:white;padding:12px;margin-top:10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.grupo{font-weight:bold;font-size:20px}
+</style>
+</head>
+<body>
+<h2>Busca de Casais</h2>
+<input id="busca" placeholder="Digite o nome do casal...">
+<div id="resultados"></div>
+
+<script>
+const dados = [
+{casal:"AURÉLIO E NATÁLIA",grupo:"VERDE"},
+{casal:"EDGAR E ÉRIKA",grupo:"VERDE"},
+{casal:"GEOMAR JUNIO E REBECCA",grupo:"VERDE"},
+{casal:"NEUBER E KARINA",grupo:"VERDE"},
+{casal:"RAFA E JANA",grupo:"VERDE"},
+{casal:"THALIS E ALINE",grupo:"VERDE"},
+{casal:"DERIK E MILLENA",grupo:"ROSA"},
+{casal:"ESDRAS E VIVI",grupo:"ROSA"},
+{casal:"JÔ E JU",grupo:"ROSA"},
+{casal:"MATHEUS PAULO E NATHALIA",grupo:"ROSA"},
+{casal:"RENATO E EVELLYN",grupo:"ROSA"},
+{casal:"VICTOR E KEMILLY",grupo:"ROSA"},
+{casal:"ITALO E RAFAELA",grupo:"AZUL"},
+{casal:"LÉO E LUANA",grupo:"AZUL"},
+{casal:"RICHARDSON E VIVI",grupo:"AZUL"},
+{casal:"ROGERIO E ROSANGELA",grupo:"AZUL"},
+{casal:"SIMÕES E SABRINA",grupo:"AZUL"},
+{casal:"WILLIAM E ANA LUIZA",grupo:"AZUL"},
+{casal:"ALEXANDRE E MARA",grupo:"MARROM"},
+{casal:"GUTO E DEBORA",grupo:"MARROM"},
+{casal:"ITALO E DAIANE",grupo:"MARROM"},
+{casal:"JIZREEL E INGRID",grupo:"MARROM"},
+{casal:"JONATAS E LUANA",grupo:"MARROM"},
+{casal:"NILSON E TALITHA",grupo:"MARROM"},
+{casal:"AKNO E GLAYCE",grupo:"LILÁS"},
+{casal:"DANILO E PRISCILA",grupo:"LILÁS"},
+{casal:"GUSTAVO E SUZANE",grupo:"LILÁS"},
+{casal:"KLEBER E RAFAELLE",grupo:"LILÁS"},
+{casal:"LUCAS E JOSI",grupo:"LILÁS"},
+{casal:"SÉRGIO E NÚBIA",grupo:"LILÁS"},
+{casal:"DIOGO E DEBORAH",grupo:"VERMELHO"},
+{casal:"ELIOENAI E LARISSA",grupo:"VERMELHO"},
+{casal:"FELIPE E ESTER",grupo:"VERMELHO"},
+{casal:"JOÃO E RAFAELA",grupo:"VERMELHO"},
+{casal:"JOÃO E THAÍS",grupo:"VERMELHO"},
+{casal:"WELLINGTON E THATIANA",grupo:"VERMELHO"},
+{casal:"ALEX E JU",grupo:"AMARELO"},
+{casal:"PAULO E ANNE",grupo:"AMARELO"},
+{casal:"PEDRO E MARINA",grupo:"AMARELO"},
+{casal:"RICARDO E CAMILA",grupo:"AMARELO"},
+{casal:"RONY E KARINA",grupo:"AMARELO"},
+{casal:"TARCISIO E ROBERTA",grupo:"AMARELO"},
+{casal:"CLAYTON E CHENIA",grupo:"LARANJA"},
+{casal:"MILTON E JOANA",grupo:"LARANJA"},
+{casal:"PAULINHO E SILVANA",grupo:"LARANJA"},
+{casal:"PAULO E SIMONE",grupo:"LARANJA"},
+{casal:"ROSEMBERG E JANAINA",grupo:"LARANJA"},
+{casal:"WILSON E MARTA",grupo:"LARANJA"}
+];
+
+const busca=document.getElementById('busca');
+const resultados=document.getElementById('resultados');
+
+busca.addEventListener('input', ()=>{
+ const t=busca.value.toLowerCase();
+ resultados.innerHTML='';
+ if(!t) return;
+
+ dados.filter(x=>x.casal.toLowerCase().includes(t))
+      .forEach(x=>{
+        resultados.innerHTML += `<div class="card"><div>${x.casal}</div><div class="grupo">Grupo ${x.grupo}</div></div>`;
+      });
+});
+</script>
+</body>
+</html>
