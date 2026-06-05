@@ -3,84 +3,312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Busca de Casais 2026</title>
+<title>Presença de Casais 2026</title>
 <style>
-body{font-family:Arial,sans-serif;margin:20px;background:#f5f5f5}
-input{width:100%;padding:12px;font-size:18px}
-.card{background:white;padding:12px;margin-top:10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-.grupo{font-weight:bold;font-size:20px}
+:root{
+  --bg:#f3f4f6;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  z-index:20;
+  padding:14px 16px;
+  box-shadow:0 1px 8px rgba(0,0,0,.16);
+}
+h2{margin:0 0 10px 0;font-size:21px}
+input[type="search"]{
+  width:100%;
+  padding:14px 12px;
+  font-size:18px;
+  border:1px solid #bbb;
+  border-radius:10px;
+  outline:none;
+}
+.resumo{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+.box{
+  flex:1;
+  background:#f9fafb;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  border:1px solid #e5e7eb;
+}
+.numero{
+  font-size:24px;
+  font-weight:800;
+}
+.label{
+  font-size:13px;
+  color:var(--muted);
+}
+main{padding:10px 16px 90px}
+.titulo-secao{
+  font-size:18px;
+  font-weight:800;
+  margin:14px 0 8px;
+}
+.card{
+  background:var(--card);
+  padding:12px;
+  margin:9px 0;
+  border-radius:12px;
+  box-shadow:0 1px 5px rgba(0,0,0,.14);
+  border-left:10px solid #999;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.card.checked{
+  opacity:.58;
+}
+.card.checked .casal{
+  text-decoration:line-through;
+}
+.info{flex:1}
+.casal{font-weight:800;font-size:16px;margin-bottom:4px}
+.grupo{font-weight:700;font-size:14px}
+.branco{font-size:13px;color:#444;margin-top:3px}
+.check{
+  width:30px;
+  height:30px;
+  flex:0 0 auto;
+}
+.verde{border-left-color:#00b050}.rosa{border-left-color:#ff00ff}.azul{border-left-color:#00c8d7}
+.marrom{border-left-color:#8b4a08}.lilas{border-left-color:#b7a0d9}.vermelho{border-left-color:#ff0000}
+.amarelo{border-left-color:#ffd000}.laranja{border-left-color:#ff9900}
+.vazio{
+  color:#666;
+  text-align:center;
+  margin-top:24px;
+}
+.barra-final{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  padding:10px 16px;
+  box-shadow:0 -1px 8px rgba(0,0,0,.16);
+  display:flex;
+  gap:8px;
+}
+button{
+  flex:1;
+  border:0;
+  border-radius:10px;
+  padding:12px;
+  font-size:15px;
+  font-weight:700;
+}
+.btn-faltantes{background:#e0f2fe;color:#075985}
+.btn-copiar{background:#dcfce7;color:#166534}
+.aviso{
+  font-size:13px;
+  color:#555;
+  margin-top:8px;
+}
 </style>
 </head>
 <body>
-<h2>Busca de Casais</h2>
-<input id="busca" placeholder="Digite o nome do casal...">
-<div id="resultados"></div>
+<header>
+  <h2>Presença de Casais 2026</h2>
+  <input id="busca" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Buscar casal, grupo ou casal branco...">
+
+  <div class="resumo">
+    <div class="box">
+      <div id="total" class="numero">0</div>
+      <div class="label">Total</div>
+    </div>
+    <div class="box">
+      <div id="presentes" class="numero">0</div>
+      <div class="label">Chegaram</div>
+    </div>
+    <div class="box">
+      <div id="faltam" class="numero">0</div>
+      <div class="label">Faltam</div>
+    </div>
+  </div>
+  <div class="aviso">Para corrigir um erro, pesquise o casal e desmarque individualmente.</div>
+</header>
+
+<main>
+  <div id="tituloLista" class="titulo-secao">Casais que ainda faltam</div>
+  <div id="resultados"></div>
+</main>
+
+<div class="barra-final">
+  <button class="btn-faltantes" onclick="mostrarSomenteFaltantes()">Ver faltantes</button>
+  <button class="btn-copiar" onclick="copiarFaltantes()">Copiar faltantes</button>
+</div>
 
 <script>
 const dados = [
-{casal:"AURÉLIO E NATÁLIA",grupo:"VERDE"},
-{casal:"EDGAR E ÉRIKA",grupo:"VERDE"},
-{casal:"GEOMAR JUNIO E REBECCA",grupo:"VERDE"},
-{casal:"NEUBER E KARINA",grupo:"VERDE"},
-{casal:"RAFA E JANA",grupo:"VERDE"},
-{casal:"THALIS E ALINE",grupo:"VERDE"},
-{casal:"DERIK E MILLENA",grupo:"ROSA"},
-{casal:"ESDRAS E VIVI",grupo:"ROSA"},
-{casal:"JÔ E JU",grupo:"ROSA"},
-{casal:"MATHEUS PAULO E NATHALIA",grupo:"ROSA"},
-{casal:"RENATO E EVELLYN",grupo:"ROSA"},
-{casal:"VICTOR E KEMILLY",grupo:"ROSA"},
-{casal:"ITALO E RAFAELA",grupo:"AZUL"},
-{casal:"LÉO E LUANA",grupo:"AZUL"},
-{casal:"RICHARDSON E VIVI",grupo:"AZUL"},
-{casal:"ROGERIO E ROSANGELA",grupo:"AZUL"},
-{casal:"SIMÕES E SABRINA",grupo:"AZUL"},
-{casal:"WILLIAM E ANA LUIZA",grupo:"AZUL"},
-{casal:"ALEXANDRE E MARA",grupo:"MARROM"},
-{casal:"GUTO E DEBORA",grupo:"MARROM"},
-{casal:"ITALO E DAIANE",grupo:"MARROM"},
-{casal:"JIZREEL E INGRID",grupo:"MARROM"},
-{casal:"JONATAS E LUANA",grupo:"MARROM"},
-{casal:"NILSON E TALITHA",grupo:"MARROM"},
-{casal:"AKNO E GLAYCE",grupo:"LILÁS"},
-{casal:"DANILO E PRISCILA",grupo:"LILÁS"},
-{casal:"GUSTAVO E SUZANE",grupo:"LILÁS"},
-{casal:"KLEBER E RAFAELLE",grupo:"LILÁS"},
-{casal:"LUCAS E JOSI",grupo:"LILÁS"},
-{casal:"SÉRGIO E NÚBIA",grupo:"LILÁS"},
-{casal:"DIOGO E DEBORAH",grupo:"VERMELHO"},
-{casal:"ELIOENAI E LARISSA",grupo:"VERMELHO"},
-{casal:"FELIPE E ESTER",grupo:"VERMELHO"},
-{casal:"JOÃO E RAFAELA",grupo:"VERMELHO"},
-{casal:"JOÃO E THAÍS",grupo:"VERMELHO"},
-{casal:"WELLINGTON E THATIANA",grupo:"VERMELHO"},
-{casal:"ALEX E JU",grupo:"AMARELO"},
-{casal:"PAULO E ANNE",grupo:"AMARELO"},
-{casal:"PEDRO E MARINA",grupo:"AMARELO"},
-{casal:"RICARDO E CAMILA",grupo:"AMARELO"},
-{casal:"RONY E KARINA",grupo:"AMARELO"},
-{casal:"TARCISIO E ROBERTA",grupo:"AMARELO"},
-{casal:"CLAYTON E CHENIA",grupo:"LARANJA"},
-{casal:"MILTON E JOANA",grupo:"LARANJA"},
-{casal:"PAULINHO E SILVANA",grupo:"LARANJA"},
-{casal:"PAULO E SIMONE",grupo:"LARANJA"},
-{casal:"ROSEMBERG E JANAINA",grupo:"LARANJA"},
-{casal:"WILSON E MARTA",grupo:"LARANJA"}
+{n:1,casal:"AURÉLIO E NATÁLIA",grupo:"VERDE",branco:"Rapha e Kelly"},
+{n:2,casal:"EDGAR E ÉRIKA",grupo:"VERDE",branco:"PV e Duda / Éder e Pri"},
+{n:3,casal:"GEOMAR JUNIO E REBECCA",grupo:"VERDE",branco:"Geomar e Eliane"},
+{n:4,casal:"NEUBER E KARINA",grupo:"VERDE",branco:"PV e Duda / Paulo e Bel"},
+{n:5,casal:"RAFA (Rafael) E JANA (Janaina)",grupo:"VERDE",branco:"PV e Duda / Gui e Babi"},
+{n:6,casal:"THALECO (Thalis) E ALINE",grupo:"VERDE",branco:"PV e Duda"},
+{n:7,casal:"DERIK E MILLENA",grupo:"ROSA",branco:"Alan e Ester"},
+{n:8,casal:"ESDRAS E VIVI (Viviane)",grupo:"ROSA",branco:"Judson e Lena"},
+{n:9,casal:"JÔ (Josley) E JU (Juliana)",grupo:"ROSA",branco:"Alberto e Carol"},
+{n:10,casal:"MATHEUS PAULO E NATHALIA",grupo:"ROSA",branco:"Gustavo e Bia"},
+{n:11,casal:"RENATO E EVELLYN",grupo:"ROSA",branco:"Renato e Romilda"},
+{n:12,casal:"VICTOR E KEMILLY",grupo:"ROSA",branco:"Lucas e Paloma"},
+{n:13,casal:"ITALO E RAFA (Rafaela)",grupo:"AZUL",branco:"Arthur e Liria"},
+{n:14,casal:"LÉO (Leonardo) E LUANA",grupo:"AZUL",branco:"Wilson e Fernanda"},
+{n:15,casal:"RICHARDSON E VIVI (Virginia)",grupo:"AZUL",branco:"Athos e Camila"},
+{n:16,casal:"ROGERIO E ROSANGELA",grupo:"AZUL",branco:"Vinicius e Jana"},
+{n:17,casal:"SIMÕES (Lucas) E SABRINA",grupo:"AZUL",branco:"Kleber e Geci"},
+{n:18,casal:"WILLIAM E ANA LUIZA",grupo:"AZUL",branco:"Jonathan e Iandra"},
+{n:19,casal:"ALEXANDRE E MARA (Maria Lúcia)",grupo:"MARROM",branco:"Amós e Marly"},
+{n:20,casal:"GUTO (Rogério) E DEBORA",grupo:"MARROM",branco:"Beto e Samanta"},
+{n:21,casal:"ITALO E DAIANE",grupo:"MARROM",branco:"Patrick e Katherine"},
+{n:22,casal:"JIZREEL E INGRID",grupo:"MARROM",branco:"Tiel e Brenda"},
+{n:23,casal:"JONATAS E LUANA",grupo:"MARROM",branco:"Pr Gilbert"},
+{n:24,casal:"NILSON E TALITHA",grupo:"MARROM",branco:"Rafa e Amanda"},
+{n:25,casal:"AKNO E GLAYCE",grupo:"LILAS",branco:"Isaac e Nathalia"},
+{n:26,casal:"DANILO E PRISCILA",grupo:"LILAS",branco:"Ramon e Carol"},
+{n:27,casal:"GUSTAVO E SUZANE",grupo:"LILAS",branco:"Mauricio e Hosana"},
+{n:28,casal:"KLEBER E RAFAELLE",grupo:"LILAS",branco:"Rafa e Amanda"},
+{n:29,casal:"LUCAS E JOSI (Josianne)",grupo:"LILAS",branco:"Patrik e Katherine"},
+{n:30,casal:"SÉRGIO E NÚBIA (Adenubia)",grupo:"LILAS",branco:"Paulo Jr e Verônica"},
+{n:31,casal:"DIOGO E DEBORAH",grupo:"VERMELHO",branco:"Rafa e Amanda"},
+{n:32,casal:"ELIOENAI E LARISSA",grupo:"VERMELHO",branco:"Douglas e Cristiane"},
+{n:33,casal:"FELIPE E ESTER",grupo:"VERMELHO",branco:"Gustavo e Bia"},
+{n:34,casal:"JOÃO E RAFA (Rafaela)",grupo:"VERMELHO",branco:"Welder e Polly"},
+{n:35,casal:"JOÃO E THAÍS",grupo:"VERMELHO",branco:"Gui e Babi"},
+{n:36,casal:"WELLINGTON E THATIANA",grupo:"VERMELHO",branco:"André e Luiza / Adair e Laís"},
+{n:37,casal:"ALEX E JU (Jucimara)",grupo:"AMARELO",branco:"Rapha e Kelly"},
+{n:38,casal:"PAULO (Cleber Paulo) E ANNE",grupo:"AMARELO",branco:"Ramon e Pâmela"},
+{n:39,casal:"PEDRO E MARINA",grupo:"AMARELO",branco:"Paulo Jr e Verônica"},
+{n:40,casal:"RICARDO E CAMILA",grupo:"AMARELO",branco:"Paulinho e Débora"},
+{n:41,casal:"RONY E KARINA",grupo:"AMARELO",branco:"Clebinho e Sasa"},
+{n:42,casal:"TARCISIO E ROBERTA",grupo:"AMARELO",branco:"Gilson e Márcia"},
+{n:43,casal:"CLAYTON E CHENIA",grupo:"LARANJA",branco:"Léo e Claudia"},
+{n:44,casal:"MILTON E JOANA",grupo:"LARANJA",branco:"Leonardo e Andressa"},
+{n:45,casal:"PAULINHO (Paulo) E SILVANA",grupo:"LARANJA",branco:"Wilson e Fernanda"},
+{n:46,casal:"PAULO E SIMONE",grupo:"LARANJA",branco:"Othiliel e Ariadne"},
+{n:47,casal:"ROSEMBERG E JANAINA",grupo:"LARANJA",branco:"Judson e Lena"},
+{n:48,casal:"WILSON E MARTA",grupo:"LARANJA",branco:"João e Cirlei"}
 ];
 
-const busca=document.getElementById('busca');
-const resultados=document.getElementById('resultados');
+const STORAGE_KEY = "presenca_casais_2026_v2";
+let presenca = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
 
-busca.addEventListener('input', ()=>{
- const t=busca.value.toLowerCase();
- resultados.innerHTML='';
- if(!t) return;
+const busca = document.getElementById("busca");
+const resultados = document.getElementById("resultados");
+const tituloLista = document.getElementById("tituloLista");
 
- dados.filter(x=>x.casal.toLowerCase().includes(t))
-      .forEach(x=>{
-        resultados.innerHTML += `<div class="card"><div>${x.casal}</div><div class="grupo">Grupo ${x.grupo}</div></div>`;
-      });
-});
+function normalizar(txt){
+  return String(txt || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+}
+
+function classeGrupo(grupo){
+  return normalizar(grupo);
+}
+
+function salvar(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(presenca));
+}
+
+function listaFaltantes(){
+  return dados.filter(x => !presenca[x.n]);
+}
+
+function atualizarContadores(){
+  const total = dados.length;
+  const chegaram = dados.filter(x => presenca[x.n]).length;
+  const faltam = total - chegaram;
+
+  document.getElementById("total").textContent = total;
+  document.getElementById("presentes").textContent = chegaram;
+  document.getElementById("faltam").textContent = faltam;
+}
+
+function setPresenca(numero, marcado){
+  presenca[numero] = marcado;
+  if(!marcado){
+    delete presenca[numero];
+  }
+  salvar();
+  renderizar();
+}
+
+function renderizar(){
+  atualizarContadores();
+
+  const termo = normalizar(busca.value.trim());
+  let lista;
+
+  if(termo.length > 0){
+    tituloLista.textContent = "Resultado da busca";
+    lista = dados.filter(x =>
+      normalizar(x.casal).includes(termo) ||
+      normalizar(x.grupo).includes(termo) ||
+      normalizar(x.branco).includes(termo)
+    );
+  }else{
+    tituloLista.textContent = "Casais que ainda faltam";
+    lista = listaFaltantes();
+  }
+
+  if(lista.length === 0){
+    resultados.innerHTML = '<div class="vazio">Nenhum casal nesta lista.</div>';
+    return;
+  }
+
+  resultados.innerHTML = lista.map(x => {
+    const marcado = !!presenca[x.n];
+    return `<div class="card ${classeGrupo(x.grupo)} ${marcado ? "checked" : ""}">
+      <input class="check" type="checkbox" ${marcado ? "checked" : ""} onchange="setPresenca(${x.n}, this.checked)">
+      <div class="info">
+        <div class="casal">${x.n}. ${x.casal}</div>
+        <div class="grupo">Grupo ${x.grupo}</div>
+        <div class="branco">Casal branco: ${x.branco || "-"}</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function mostrarSomenteFaltantes(){
+  busca.value = "";
+  renderizar();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+async function copiarFaltantes(){
+  const faltantes = listaFaltantes();
+  let texto = `Faltam ${faltantes.length} casal(is):\n\n`;
+  texto += faltantes.map(x => `${x.n}. ${x.casal} - Grupo ${x.grupo}`).join("\n");
+
+  try{
+    await navigator.clipboard.writeText(texto);
+    alert("Lista dos faltantes copiada.");
+  }catch(e){
+    prompt("Copie a lista abaixo:", texto);
+  }
+}
+
+busca.addEventListener("input", renderizar);
+busca.addEventListener("keyup", renderizar);
+busca.addEventListener("search", renderizar);
+window.addEventListener("load", renderizar);
 </script>
 </body>
 </html>
